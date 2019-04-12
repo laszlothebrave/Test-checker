@@ -1,2 +1,1 @@
-# Test-checker
 Test-checker
