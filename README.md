@@ -9,3 +9,4 @@ Moduł Andrzeja implementuje interfejs GradeAssigner.
 
 Moduł Leszka przyjmuje ściezki od użytkownika i zapisuje wynik do pliku.
 
+Testowany pod Windows 10 64-bit.

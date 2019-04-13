@@ -1,0 +1,13 @@
+OpenCV instructions:
+ - install maven: https://www.mkyong.com/maven/how-to-install-maven-in-windows/
+ - go to opencv location in your repo and from cmd run
+    mvn install:install-file -Dfile=opencv-410.jar -DgroupId=opencv -DartifactId=opencv -Dversion=410 -Dpackaging=jar
+ - in File, Project structure, Libraries add dll from folder opencv
+ - tested od Windows 10, 64 bit, IntelliJ 2018.3
+
+
+
+
+
+Priv notes:
+-DlocalRepositoryPath=C:\Users\Laszlo\Desktop\Test-checker\src\main\openCV
