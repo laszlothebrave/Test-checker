@@ -3,7 +3,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class ConsoleApp {
-    static SheetReader sheetReader;
+    static SheetReader sheetReader = new SheetReaderImplementation();
     static GradeAssigner gradeAssigner;
     static File correctAnswersFile;
     static File[] testsPaths;
