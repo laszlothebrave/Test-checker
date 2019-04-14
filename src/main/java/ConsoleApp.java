@@ -1,4 +1,7 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
@@ -11,14 +14,26 @@ public class ConsoleApp {
     static ArrayList<TestEvaluation> tests;
 
     public static void main(String[] args) {
-        createPaths(args);
+        try {
+            createPaths(args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             readCorrectAnswersSheet();
         } catch (CantReadCorrectAnswers e) {
             e.printStackTrace();
         }
-        readAtLeastOneStudentSheet();
-        printResults();
+        try {
+            readAtLeastOneStudentSheet();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            printResults();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static void createPaths(String[] args) {
@@ -35,11 +50,15 @@ public class ConsoleApp {
 
     }
 
-    private static void printResults(){
-
+    private static void assignGrades () {
+        
     }
-
-
+    private static void printResults() throws FileNotFoundException, UnsupportedEncodingException {
+        PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+        writer.println("The first line");
+        writer.println("The second line");
+        writer.close();
+    }
 }
 
 
