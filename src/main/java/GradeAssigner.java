@@ -1,6 +1,7 @@
 //Andrzej
 
 public interface GradeAssigner {
-    void setAnswerKey (TestEvaluation correcrAnswers);
+    void setAnswerKey (TestEvaluation correctAnswers);
     GradeAndStudentCode assignGrade (TestEvaluation studentAnswers);
 }
+
