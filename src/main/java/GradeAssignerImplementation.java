@@ -11,8 +11,24 @@ public class GradeAssignerImplementation implements GradeAssigner{
     @Override
     public GradeAndStudentCode assignGrade(TestEvaluation studentAnswers) {
         GradeAndStudentCode actualStudent=new GradeAndStudentCode(studentAnswers.studentCode);
+        float percentage=evaluateGrade(studentAnswers);
+        Grade grade =fromPercentageTograde(percentage);
+        actualStudent.grade=grade;
+        return actualStudent;
 
-        return null;
+    }
+    private Grade fromPercentageTograde(float percentage){
+        if(percentage<50)
+            return Grade.F;
+        if(percentage>50 && percentage<60)
+            return Grade.E;
+        if(percentage>60 && percentage<70)
+                return Grade.D;
+        if(percentage>70 && percentage<80)
+            return Grade.C;
+        if(percentage>80 && percentage<90)
+            return Grade.B;
+        return Grade.A;
     }
 
     public static int[] CheckAnswers(ArrayList<Integer> Good, ArrayList<Integer> maybeBad){
@@ -28,7 +44,7 @@ public class GradeAssignerImplementation implements GradeAssigner{
         return tmp;
     }
 
-    private float evaluateGrade (TestEvaluation correctAnswers, TestEvaluation studentAnswers){
+    private float evaluateGrade ( TestEvaluation studentAnswers){
         float percentage=0;
         int numberOfGoodAnswers=0;
         int globalGoodAnswers=0;

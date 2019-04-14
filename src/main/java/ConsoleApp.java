@@ -2,16 +2,16 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class ConsoleApp {
     static SheetReader sheetReader = new SheetReaderImplementation();
-    static GradeAssigner gradeAssigner;
+    static GradeAssigner gradeAssigner = new GradeAssignerImplementation();
     static File correctAnswersFile;
     static File[] testsPaths;
     static TestEvaluation correctAnswers;
-    static ArrayList<TestEvaluation> tests;
+    static ArrayList<TestEvaluation> tests = new ArrayList<>();
+    static ArrayList<GradeAndStudentCode> grades = new ArrayList<>();
 
     public static void main(String[] args) {
         try {
@@ -47,16 +47,22 @@ public class ConsoleApp {
     }
 
     private static void readAtLeastOneStudentSheet(){
-
+        for (File iter : testsPaths) {
+            tests.add(sheetReader.readSheet(iter));
+        }
     }
 
     private static void assignGrades () {
-        
+        for (TestEvaluation iter : tests) {
+            grades.add(gradeAssigner.assignGrade(iter));
+        }
     }
     private static void printResults() throws FileNotFoundException, UnsupportedEncodingException {
         PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
-        writer.println("The first line");
-        writer.println("The second line");
+        writer.println("Results: ");
+        for (GradeAndStudentCode iter : grades) {
+            writer.println(iter.toString());
+        }
         writer.close();
     }
 }
