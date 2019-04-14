@@ -9,6 +9,7 @@ public class GradeAndStudentCode {
     }
 
     public String toString(){
+        int abb=0;
         StringBuilder codeAndGrade= new StringBuilder();
         codeAndGrade.append(studentCode);
         codeAndGrade.append(" dear Student your grade is: ");
