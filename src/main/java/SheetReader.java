@@ -1,7 +1,7 @@
 //Zbyszek
 
-import java.nio.file.Path;
+import java.io.File;
 
 public interface SheetReader {
-    TestEvaluation readSheet (Path path);
+    TestEvaluation readSheet (File file);
 }
