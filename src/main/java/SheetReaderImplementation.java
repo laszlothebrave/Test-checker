@@ -14,6 +14,8 @@ public class SheetReaderImplementation implements SheetReader {
     private final int COLUMN_NUMBER = 2;
     private final int COLUMN_OFFSET = 6;
     private final int ANSWERS_NUMBER = 5;
+    private final int DEFAULT_WIDTH = 794;
+    private final int DEFAULT_HEIGHT = 1123;
 
     private int get_answer(Mat row, double unit) {
         Imgproc.cvtColor(row,row,Imgproc.COLOR_BGR2GRAY);
@@ -35,9 +37,6 @@ public class SheetReaderImplementation implements SheetReader {
 
     private ArrayList<ArrayList<Integer>> get_answers(Mat answers_image, double unit){
         ArrayList<ArrayList<Integer>> answers = new ArrayList<>();
-        System.out.println(answers_image.cols());
-        System.out.println("    ");
-        System.out.println(answers_image.rows());
         for (int i = 0; i < COLUMN_NUMBER; i++) {
             for (int j = 0; j < ANSWERS_IN_COLUMN; j++) {
                 Point start_point = new Point(unit * (i * (COLUMN_OFFSET + (2 * ANSWERS_NUMBER + 1)) + 2), (2 * j + 1) * unit);
@@ -83,7 +82,7 @@ public class SheetReaderImplementation implements SheetReader {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         Mat test_image = Imgcodecs.imread(file.getPath(), Imgcodecs.IMREAD_COLOR);
         Mat corner_template = Imgcodecs.imread("src/main/resources/template.jpg");
-
+        Imgproc.resize(test_image,test_image,new Size(DEFAULT_WIDTH,DEFAULT_HEIGHT));
         ArrayList<Point> answer_coords = answer_coords(test_image, corner_template);
         answer_coords.sort((o1, o2) -> {
             if(o1.x < o2.x)
@@ -105,7 +104,7 @@ public class SheetReaderImplementation implements SheetReader {
         TestEvaluation testEvaluation = new TestEvaluation();
         testEvaluation.sourceFile = file.toPath();
         testEvaluation.checkedAnswers = get_answers(answers_image,unit);
-        //HighGui.waitKey(0);
+       // HighGui.waitKey(0);
         return testEvaluation;
     }
 }
