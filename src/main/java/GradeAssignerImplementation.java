@@ -40,7 +40,9 @@ public class GradeAssignerImplementation implements GradeAssigner{
             if(maybeBad.contains(good))
                 numberOfGoodAnswers++;//liczymy ile studentrobak robil dobrze
         }
-        tmp[0]=numberOfGoodAnswers;
+        if(maybeBad.size()>numberOfGoodAnswers)
+            tmp[0]=0;
+        else tmp[0]=numberOfGoodAnswers;
         return tmp;
     }
 
