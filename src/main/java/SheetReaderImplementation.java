@@ -32,9 +32,9 @@ public class SheetReaderImplementation implements SheetReader {
                 max_pixel_number = pixel_number;
             }
         }
-        if(max_pixel_number >= unit*unit/2)
+        if(max_pixel_number >= unit*unit/10)
             return answer_index;
-        else return -1;
+        return -1;
     }
 
     private ArrayList<ArrayList<Integer>> get_answers(Mat answers_image, double unit){
@@ -52,7 +52,7 @@ public class SheetReaderImplementation implements SheetReader {
                 ArrayList<Integer> answers_in_row = new ArrayList<>();
                 int answer = get_answer(row,unit);
                 if(answer!=-1) {
-                    answers_in_row.add(get_answer(row, unit));
+                    answers_in_row.add(answer);
                     answers.add(answers_in_row);
                 }
             }
@@ -109,7 +109,7 @@ public class SheetReaderImplementation implements SheetReader {
         TestEvaluation testEvaluation = new TestEvaluation();
         testEvaluation.sourceFile = file.toPath();
         testEvaluation.checkedAnswers = get_answers(answers_image,unit);
-        HighGui.waitKey(0);
+        //HighGui.waitKey(0);
         return testEvaluation;
     }
 }

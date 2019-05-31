@@ -48,7 +48,7 @@ public class GradeAssignerImplementation implements GradeAssigner{
         float percentage=0;
         int numberOfGoodAnswers=0;
         int globalGoodAnswers=0;
-        int[] goodForStudentAndGoodGlobal=new int[2];
+        int[] goodForStudentAndGoodGlobal = new int[2];
         for(int i=0;i<correctAnswers.checkedAnswers.size();i++){
             goodForStudentAndGoodGlobal=CheckAnswers(correctAnswers.checkedAnswers.get(i),studentAnswers.checkedAnswers.get(i));
             numberOfGoodAnswers+=goodForStudentAndGoodGlobal[0];
