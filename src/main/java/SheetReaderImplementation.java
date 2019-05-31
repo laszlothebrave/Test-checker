@@ -62,7 +62,7 @@ public class SheetReaderImplementation implements SheetReader {
             Imgproc.warpAffine(corner_template, corner_template, rotation, size);
             Imgproc.matchTemplate(test_image, corner_template, match_result, match_method);
             Core.MinMaxLocResult mmr = Core.minMaxLoc(match_result);
-            Mat answer_coord_to_display = new Mat(test_image, new Rect((int)mmr.maxLoc.x, (int)mmr.maxLoc.y,100,100));
+            Mat answer_coord_to_display = new Mat(test_image, new Rect((int)mmr.maxLoc.x, (int)mmr.maxLoc.y,corner_template.cols(),corner_template.rows()));
             coords.add(mmr.maxLoc);
             HighGui.imshow("D"+i, answer_coord_to_display);
         }
@@ -84,7 +84,7 @@ public class SheetReaderImplementation implements SheetReader {
 
         Rect answers_roi = new Rect(new Point(answer_coords.get(0).x + corner_template.cols() + LINE_THICKNESS, answer_coords.get(0).y + corner_template.rows() + LINE_THICKNESS), new Size(column_width - LINE_THICKNESS, column_height));
         Mat answers_image = new Mat(test_image, answers_roi);
-        Imgproc.resize( answers_image, answers_image, new Size(500,800) );
+        //Imgproc.resize( answers_image, answers_image, new Size(500,800) );
         HighGui.imshow("ans",answers_image);
         TestEvaluation testEvaluation = new TestEvaluation();
         testEvaluation.sourceFile = file.toPath();
