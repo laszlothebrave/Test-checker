@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class ConsoleApp {
@@ -58,7 +59,8 @@ public class ConsoleApp {
         }
     }
     private static void printResults() throws FileNotFoundException, UnsupportedEncodingException {
-        PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+        String path=correctAnswersFile.getAbsolutePath();
+        PrintWriter writer = new PrintWriter(path+"/the-file-name.txt", "UTF-8");
         writer.println("Results: ");
         for (GradeAndStudentCode iter : grades) {
             writer.println(iter.toString());
