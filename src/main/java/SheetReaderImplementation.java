@@ -42,19 +42,13 @@ public class SheetReaderImplementation implements SheetReader {
         for (int i = 0; i < COLUMN_NUMBER; i++) {
             for (int j = 0; j < ANSWERS_IN_COLUMN; j++) {
                 Point start_point = new Point(unit * (i * (COLUMN_OFFSET + (2 * ANSWERS_NUMBER + 1)) + 2), (2 * j + 1) * unit);
-                Rect row_roi;
-                if(j==19){
-                    row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
-                }else{
-                    row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
-                }
+                Rect row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
                 Mat row = new Mat(answers_image, row_roi);
                 ArrayList<Integer> answers_in_row = new ArrayList<>();
                 int answer = get_answer(row,unit);
-                if(answer!=-1) {
+                if(answer!=-1)
                     answers_in_row.add(answer);
-                    answers.add(answers_in_row);
-                }
+                answers.add(answers_in_row);
             }
         }
         return answers;
@@ -99,6 +93,7 @@ public class SheetReaderImplementation implements SheetReader {
             else return 0;
         });
         HighGui.imshow("Display3", test_image);
+
         double column_width = (answer_coords.get(3).x - (answer_coords.get(0).x + corner_template.cols()));
         double column_height = (answer_coords.get(3).y - (answer_coords.get(0).y + corner_template.rows()));
         double unit = column_width / UNITS_IN_COLUMNS;
