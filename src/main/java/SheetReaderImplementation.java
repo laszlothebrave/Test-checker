@@ -40,7 +40,6 @@ public class SheetReaderImplementation implements SheetReader {
                 Point start_point = new Point(unit * (i * (COLUMN_OFFSET + (2 * ANSWERS_NUMBER + 1)) + 2), (2 * j + 1) * unit);
                 Rect row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
                 Mat row = new Mat(answers_image, row_roi);
-
                 ArrayList<Integer> answer = new ArrayList<>();
                 answer.add(get_answer(row,unit));
                 answers.add(answer);
@@ -52,7 +51,7 @@ public class SheetReaderImplementation implements SheetReader {
     private ArrayList<Point> answer_coords(Mat test_image, Mat corner_template) {
         ArrayList<Point> coords = new ArrayList<>();
 
-        int match_method = Imgproc.TM_CCOEFF;
+        int match_method = Imgproc.TM_SQDIFF_NORMED;
         int angle = 90;
         Point center = new Point(corner_template.cols() / 2, corner_template.rows() / 2);
         Size size = new Size(corner_template.cols(), corner_template.rows());
@@ -86,7 +85,7 @@ public class SheetReaderImplementation implements SheetReader {
         Rect answers_roi = new Rect(new Point(answer_coords.get(0).x + corner_template.cols() + LINE_THICKNESS, answer_coords.get(0).y + corner_template.rows() + LINE_THICKNESS), new Size(column_width - LINE_THICKNESS, column_height));
         Mat answers_image = new Mat(test_image, answers_roi);
         Imgproc.resize( answers_image, answers_image, new Size(500,800) );
-        HighGui.imshow("xkurwade",answers_image);
+        HighGui.imshow("ans",answers_image);
         TestEvaluation testEvaluation = new TestEvaluation();
         testEvaluation.sourceFile = file.toPath();
         testEvaluation.checkedAnswers = get_answers(answers_image,unit);
