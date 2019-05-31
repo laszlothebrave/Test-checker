@@ -49,7 +49,7 @@ public class GradeAssignerImplementationTests {
     }
 
     @Test
-    public void CheckAnswersIfStudentHasEverythingSame() {
+    public void CheckAnswersIfStudentHasEveryThingSame() {
         //student zaznaczyl troche dobrych troche zlych
         ArrayList<Integer> good = new ArrayList<>();
         good.add(new Integer(1));good.add(3);good.add(4);good.add(0);
