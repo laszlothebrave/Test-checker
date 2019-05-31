@@ -51,7 +51,7 @@ public class SheetReaderImplementation implements SheetReader {
     private ArrayList<Point> answer_coords(Mat test_image, Mat corner_template) {
         ArrayList<Point> coords = new ArrayList<>();
 
-        int match_method = Imgproc.TM_SQDIFF_NORMED;
+        int match_method = Imgproc.TM_SQDIFF;
         int angle = 90;
         Point center = new Point(corner_template.cols() / 2, corner_template.rows() / 2);
         Size size = new Size(corner_template.cols(), corner_template.rows());
