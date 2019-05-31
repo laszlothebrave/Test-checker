@@ -26,10 +26,12 @@ public class ConsoleApp {
             e.printStackTrace();
         }
         try {
-          //  readAtLeastOneStudentSheet();
+            readAtLeastOneStudentSheet();
         } catch (Exception e){
             e.printStackTrace();
         }
+        gradeAssigner.setAnswerKey(correctAnswers);
+        assignGrades();
         try {
             printResults();
         } catch (Exception e) {
@@ -60,7 +62,7 @@ public class ConsoleApp {
     }
     private static void printResults() throws FileNotFoundException, UnsupportedEncodingException {
         String path=correctAnswersFile.getAbsolutePath();
-        PrintWriter writer = new PrintWriter("/the-file-name.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
         writer.println("Results: ");
         for (GradeAndStudentCode iter : grades) {
             writer.println(iter.toString());

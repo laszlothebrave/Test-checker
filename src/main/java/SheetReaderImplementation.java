@@ -105,7 +105,7 @@ public class SheetReaderImplementation implements SheetReader {
         TestEvaluation testEvaluation = new TestEvaluation();
         testEvaluation.sourceFile = file.toPath();
         testEvaluation.checkedAnswers = get_answers(answers_image,unit);
-        HighGui.waitKey(0);
+        //HighGui.waitKey(0);
         return testEvaluation;
     }
 }
