@@ -1,30 +1,33 @@
 1. Program przewiduje gotowy Szablon arkusza
-- w szablonie znajdzie siê 40 miejsc na pytania z piêcioma opcjami wyboru (A B C D E)
-- przewidziane jest tak¿e miejsce na kod studenta - dziewiêæ kratek w formacie 3x3
+- w szablonie znajdzie siÄ™ 40 miejsc na pytania z piÄ™cioma opcjami wyboru (A B C D E)
+- przewidziane jest takÅ¼e miejsce na kod studenta - dziewiÄ™Ä‡ kratek w formacie 3x3
 
-2. Egzamin jest jednokrotnego wyboru i przewiduje aby mia³ zawsze 40 pytañ
+2. Egzamin jest jednokrotnego wyboru i przewiduje aby miaÅ‚ zawsze 40 pytaÅ„
 
-3. Tester ma zwracaæ poprawne wyniki bez wzglêdu jakim kolorem zaznacznamy odpowiedzi, z jednym warunkiem kolor ma mieæ przynajmniej 50% w skali szaroœci.
+3. Tester ma zwracaÄ‡ poprawne wyniki bez wzglÄ™du jakim kolorem zaznacznamy odpowiedzi, z jednym warunkiem kolor ma mieÄ‡ przynajmniej 50% w skali szaroÅ›ci.
 
-4. Na podstawie liczby punktów program ma wystawiaæ ocenê zgodnie z kryteriami przyjêtymi na Uniwersytecie Jagielloñskim.
+4. Na podstawie liczby punktÃ³w program ma wystawiaÄ‡ ocenÄ™ zgodnie z kryteriami przyjÄ™tymi na Uniwersytecie JagielloÅ„skim.
 
-6. Program ma za zadanie sczytywaæ w których kratkach zaznaczone by³y odpowiedzi.
-- jako poprawny obraz przyjmujê siê skan podanego przez nas szablonu z punktu pierwszego.
-- podczas skanowania powinno siê zwróciæ uwagê by nie zaburzyæ pionowej orientacji arkusza._
+5. Wynikiem dziaÅ‚ania programu sÄ… sformatowane oceny wraz z odpowiadajÄ…cymy im kodami studentÃ³w.
+- zwracany jest plik tekstowy w tej samej lokalizajcji co kod programu.
 
-7. Kodem studenta jest kwadrat 3x3, w programie rozumiemy to jako ci¹g dziêwiêcio elementowy
-sk³adaj¹cy siê z 0 i 1. Program parsuje z kwardatu na napis i jest od widoczny razem z ocen¹ w wynikachg testu. 
+6. Program ma za zadanie sczytywaÄ‡ w ktÃ³rych kratkach zaznaczone byÅ‚y odpowiedzi.
+- jako poprawny obraz przyjmujÄ™ siÄ™ skan podanego przez nas szablonu z punktu pierwszego.
+- podczas skanowania powinno siÄ™ zwrÃ³ciÄ‡ uwagÄ™ by nie zaburzyÄ‡ pionowej orientacji arkusza._
 
-8. Kluczem odpowedzi jest ten sam arkusz testowy co dany studentom, zaznaczone odpowiedzi pos³u¿¹ do wskazania programowi które s¹ poprawne.
-- za³o¿enie: nauczyciel odpowiedzialny jest za poprawnoœæ klucza, a nie program.
+7. Kodem studenta jest kwadrat 3x3, w programie rozumiemy to jako ciÄ…g dziÄ™wiÄ™cio elementowy
+skÅ‚adajÄ…cy siÄ™ z 0 i 1. Program parsuje z kwardatu na napis i jest od widoczny razem z ocenÄ… w wynikachg testu. 
 
-9. Interfejs u¿ytkownika ogranicza siê do aplikacji konsolowej.
-- nie ma ¿adnych ustawieñ czy opcji
-- u¿ytkownik tylko podaje dane, zatwierdza i otrzymuje rezultaty (fasada)
+8. Kluczem odpowedzi jest ten sam arkusz testowy co dany studentom, zaznaczone odpowiedzi posÅ‚uÅ¼Ä… do wskazania programowi ktÃ³re sÄ… poprawne.
+- zaÅ‚oÅ¼enie: nauczyciel odpowiedzialny jest za poprawnoÅ›Ä‡ klucza, a nie program.
 
-10. Wprowadzone jest usprawnienie maj¹ce redukowaæ liczbe strzelonych odpowiedzi
-- od wyniku i od maksymalnej liczby odjêta jest wartoœæ oczekiwana (8 pt) strzelonych odpowiedzi.
+9. Interfejs uÅ¼ytkownika ogranicza siÄ™ do aplikacji konsolowej.
+- nie ma Å¼adnych ustawieÅ„ czy opcji
+- uÅ¼ytkownik tylko podaje dane, zatwierdza i otrzymuje rezultaty (fasada)
 
-11. Program dzia³a deterministycznie - uruchomiony dwa razy na tym samym zbiorze danych daje te same wyniki.
+10. Wprowadzone jest usprawnienie majÄ…ce redukowaÄ‡ liczbe strzelonych odpowiedzi
+- od wyniku i od maksymalnej liczby odjÄ™ta jest wartoÅ›Ä‡ oczekiwana (8 pt) strzelonych odpowiedzi.
+
+11. Program dziaÅ‚a deterministycznie - uruchomiony dwa razy na tym samym zbiorze danych daje te same wyniki.
  
-12. Jako input do progamu podane s¹ œcie¿ki do obrazów zawieraj¹cych zeskanowane arkusze.
+12. Jako input do progamu podane sÄ… Å›cieÅ¼ki do obrazÃ³w zawierajÄ…cych zeskanowane arkusze.
