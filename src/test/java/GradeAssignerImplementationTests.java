@@ -1,7 +1,10 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Andrea on 14/04/2019.
@@ -57,7 +60,22 @@ public class GradeAssignerImplementationTests {
         Assert.assertArrayEquals(expected,actual);
 
     }
+    @Test
+    public void evaluateGradeCommonCase (){
+        Path path= Paths.get("C//Desktop");
+        ArrayList<ArrayList<Integer>> myAll= new ArrayList<ArrayList<Integer>>();
+        for(int i=0;i<40;i++){
+            ArrayList<Integer> tmp=new ArrayList<Integer>();
+            tmp.add(1);
+            tmp.add(2);
+            myAll.add(tmp);
+        }
+        GradeAssignerImplementation test=new GradeAssignerImplementation();
+        TestEvaluation good=new TestEvaluation(path,"123",myAll);
+        test.correctAnswers=good;
+        TestEvaluation commonStudent=new TestEvaluation(path,"123",myAll);
+        float answer=test.evaluateGrade(commonStudent);
+        Assert.assertEquals(100,answer,0.000001);
 
-
-
+}
 }

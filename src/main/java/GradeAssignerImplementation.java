@@ -46,7 +46,7 @@ public class GradeAssignerImplementation implements GradeAssigner{
         return tmp;
     }
 
-    private float evaluateGrade ( TestEvaluation studentAnswers){
+    public float evaluateGrade ( TestEvaluation studentAnswers){
         float percentage=0;
         int numberOfGoodAnswers=0;
         int globalGoodAnswers=0;
@@ -55,11 +55,12 @@ public class GradeAssignerImplementation implements GradeAssigner{
             goodForStudentAndGoodGlobal=CheckAnswers(correctAnswers.checkedAnswers.get(i),studentAnswers.checkedAnswers.get(i));
             numberOfGoodAnswers+=goodForStudentAndGoodGlobal[0];
             globalGoodAnswers+=goodForStudentAndGoodGlobal[1];
-            numberOfGoodAnswers-=8;
-            globalGoodAnswers-=8;
-            if(numberOfGoodAnswers<0)
-                numberOfGoodAnswers=0;//jezeli mial mniej niz 8 dobrych odpowiedzi to i tak oddajemy 0 bo nie moze miec negatywne
+
         }
+        numberOfGoodAnswers-=8;
+        globalGoodAnswers-=8;
+        if(numberOfGoodAnswers<0)
+            numberOfGoodAnswers=0;//jezeli mial mniej niz 8 dobrych odpowiedzi to i tak oddajemy 0 bo nie moze miec negatywne
         percentage=numberOfGoodAnswers/globalGoodAnswers*100;
 
         return percentage;
