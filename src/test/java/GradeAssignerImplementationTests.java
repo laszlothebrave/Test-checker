@@ -23,7 +23,7 @@ public class GradeAssignerImplementationTests {
     public void CheckAnswersIfStudentHasEverythingGood() {
         //student zaznaczyl troche dobrych troche zlych
         ArrayList<Integer> good = new ArrayList<>();
-        good.add(1);good.add(3);good.add(4);good.add(0);
+        good.add(new Integer(1));good.add(3);good.add(4);good.add(0);
         ArrayList<Integer> bad= new ArrayList<>();
         bad.add(1);bad.add(4);bad.add(3);
         final int[] expected={3,4};
@@ -44,4 +44,20 @@ public class GradeAssignerImplementationTests {
         Assert.assertArrayEquals(expected,actual);
 
     }
+
+    @Test
+    public void CheckAnswersIfStudentHasEverythingSame() {
+        //student zaznaczyl troche dobrych troche zlych
+        ArrayList<Integer> good = new ArrayList<>();
+        good.add(new Integer(1));good.add(3);good.add(4);good.add(0);
+        ArrayList<Integer> bad= new ArrayList<>();
+        bad.add(2);bad.add(4);bad.add(3);
+        final int[] expected={0,1};
+        final int[] actual= GradeAssignerImplementation.CheckAnswers(good,bad);
+        Assert.assertArrayEquals(expected,actual);
+
+    }
+
+
+
 }
