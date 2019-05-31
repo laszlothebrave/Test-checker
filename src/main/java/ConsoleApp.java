@@ -60,7 +60,7 @@ public class ConsoleApp {
     }
     private static void printResults() throws FileNotFoundException, UnsupportedEncodingException {
         String path=correctAnswersFile.getAbsolutePath();
-        PrintWriter writer = new PrintWriter(path+"/the-file-name.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("/the-file-name.txt", "UTF-8");
         writer.println("Results: ");
         for (GradeAndStudentCode iter : grades) {
             writer.println(iter.toString());

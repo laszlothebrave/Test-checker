@@ -35,10 +35,18 @@ public class SheetReaderImplementation implements SheetReader {
 
     private ArrayList<ArrayList<Integer>> get_answers(Mat answers_image, double unit){
         ArrayList<ArrayList<Integer>> answers = new ArrayList<>();
+        System.out.println(answers_image.cols());
+        System.out.println("    ");
+        System.out.println(answers_image.rows());
         for (int i = 0; i < COLUMN_NUMBER; i++) {
             for (int j = 0; j < ANSWERS_IN_COLUMN; j++) {
                 Point start_point = new Point(unit * (i * (COLUMN_OFFSET + (2 * ANSWERS_NUMBER + 1)) + 2), (2 * j + 1) * unit);
-                Rect row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
+                Rect row_roi;
+                if(j==19){
+                    row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
+                }else{
+                    row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
+                }
                 Mat row = new Mat(answers_image, row_roi);
                 ArrayList<Integer> answer = new ArrayList<>();
                 answer.add(get_answer(row,unit));
@@ -51,7 +59,7 @@ public class SheetReaderImplementation implements SheetReader {
     private ArrayList<Point> answer_coords(Mat test_image, Mat corner_template) {
         ArrayList<Point> coords = new ArrayList<>();
 
-        int match_method = Imgproc.TM_SQDIFF;
+        int match_method = Imgproc.TM_CCOEFF;
         int angle = 90;
         Point center = new Point(corner_template.cols() / 2, corner_template.rows() / 2);
         Size size = new Size(corner_template.cols(), corner_template.rows());
@@ -77,6 +85,15 @@ public class SheetReaderImplementation implements SheetReader {
         Mat corner_template = Imgcodecs.imread("src/main/resources/template.jpg");
 
         ArrayList<Point> answer_coords = answer_coords(test_image, corner_template);
+        answer_coords.sort((o1, o2) -> {
+            if(o1.x < o2.x)
+                return 1;
+            else if(o1.x == o2.x)
+                if(o1.y < o2.y)
+                    return 1;
+                else return 0;
+            else return 0;
+        });
         HighGui.imshow("Display3", test_image);
         double column_width = (answer_coords.get(3).x - (answer_coords.get(0).x + corner_template.cols()));
         double column_height = (answer_coords.get(3).y - (answer_coords.get(0).y + corner_template.rows()));
@@ -84,12 +101,11 @@ public class SheetReaderImplementation implements SheetReader {
 
         Rect answers_roi = new Rect(new Point(answer_coords.get(0).x + corner_template.cols() + LINE_THICKNESS, answer_coords.get(0).y + corner_template.rows() + LINE_THICKNESS), new Size(column_width - LINE_THICKNESS, column_height));
         Mat answers_image = new Mat(test_image, answers_roi);
-        //Imgproc.resize( answers_image, answers_image, new Size(500,800) );
         HighGui.imshow("ans",answers_image);
         TestEvaluation testEvaluation = new TestEvaluation();
         testEvaluation.sourceFile = file.toPath();
         testEvaluation.checkedAnswers = get_answers(answers_image,unit);
-        HighGui.waitKey();
+        HighGui.waitKey(0);
         return testEvaluation;
     }
 }
