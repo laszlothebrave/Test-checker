@@ -40,20 +40,28 @@ public class GradeAssignerImplementation implements GradeAssigner{
             if(maybeBad.contains(good))
                 numberOfGoodAnswers++;//liczymy ile studentrobak robil dobrze
         }
-        tmp[0]=numberOfGoodAnswers;
+        if(maybeBad.size()>numberOfGoodAnswers)
+            tmp[0]=0;
+        else tmp[0]=numberOfGoodAnswers;
         return tmp;
     }
 
-    private float evaluateGrade ( TestEvaluation studentAnswers){
+    public float evaluateGrade ( TestEvaluation studentAnswers){
         float percentage=0;
-        int numberOfGoodAnswers=0;
-        int globalGoodAnswers=0;
+        float numberOfGoodAnswers=0;
+        //float globalGoodAnswers=0;
+        float globalGoodAnswers=32;
         int[] goodForStudentAndGoodGlobal = new int[2];
         for(int i=0;i<correctAnswers.checkedAnswers.size();i++){
             goodForStudentAndGoodGlobal=CheckAnswers(correctAnswers.checkedAnswers.get(i),studentAnswers.checkedAnswers.get(i));
             numberOfGoodAnswers+=goodForStudentAndGoodGlobal[0];
-            globalGoodAnswers+=goodForStudentAndGoodGlobal[1];
+            //globalGoodAnswers+=goodForStudentAndGoodGlobal[1];
+
         }
+        numberOfGoodAnswers-=8;
+        //globalGoodAnswers-=8;
+        if(numberOfGoodAnswers<0)
+            numberOfGoodAnswers=0;//jezeli mial mniej niz 8 dobrych odpowiedzi to i tak oddajemy 0 bo nie moze miec negatywne
         percentage=numberOfGoodAnswers/globalGoodAnswers*100;
 
         return percentage;

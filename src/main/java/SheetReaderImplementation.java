@@ -5,7 +5,6 @@ import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class SheetReaderImplementation implements SheetReader {
 
@@ -51,26 +50,25 @@ public class SheetReaderImplementation implements SheetReader {
     }
 
     private int get_answer(Mat row, double unit) {
-        Imgproc.cvtColor(row, row, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.threshold(row, row, 200, 255, Imgproc.THRESH_BINARY_INV);
+        Imgproc.cvtColor(row,row,Imgproc.COLOR_BGR2GRAY);
+        Imgproc.threshold(row, row, 127, 255, Imgproc.THRESH_BINARY_INV);
         int answer_index = 0;
         int max_pixel_number = 0;
         for (int i = 0; i < ANSWERS_NUMBER; i++) {
-            Rect answer = new Rect(new Point(unit * i * 2, 0), new Size(unit, unit));
-            Mat answer_mat = new Mat(row, answer);
+            Rect answer = new Rect(new Point(unit*i*2,0),new Size(unit,unit));
+            Mat answer_mat = new Mat(row,answer);
             int pixel_number = Core.countNonZero(answer_mat);
             if (pixel_number > max_pixel_number) {
                 answer_index = i;
                 max_pixel_number = pixel_number;
             }
         }
-        if (max_pixel_number >= unit * unit / 10)
+        if(max_pixel_number >= unit*unit/10)
             return answer_index;
         return -1;
     }
 
-
-    private ArrayList<ArrayList<Integer>> get_answers(Mat answers_image, double unit) {
+    private ArrayList<ArrayList<Integer>> get_answers(Mat answers_image, double unit){
         ArrayList<ArrayList<Integer>> answers = new ArrayList<>();
         for (int i = 0; i < COLUMN_NUMBER; i++) {
             for (int j = 0; j < ANSWERS_IN_COLUMN; j++) {
@@ -78,8 +76,8 @@ public class SheetReaderImplementation implements SheetReader {
                 Rect row_roi = new Rect(start_point, new Size(unit * (ANSWERS_NUMBER * 2 - 1), unit));
                 Mat row = new Mat(answers_image, row_roi);
                 ArrayList<Integer> answers_in_row = new ArrayList<>();
-                int answer = get_answer(row, unit);
-                if (answer != -1)
+                int answer = get_answer(row,unit);
+                if(answer!=-1)
                     answers_in_row.add(answer);
                 answers.add(answers_in_row);
             }
@@ -109,10 +107,13 @@ public class SheetReaderImplementation implements SheetReader {
 
     @Override
     public TestEvaluation readSheet(File file) {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        final String dir = System.getProperty("user.dir");
+        System.out.println("current dir = " + dir);
+        System.load(dir + "/opencv_java410.dll");
+        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         Mat test_image = Imgcodecs.imread(file.getPath(), Imgcodecs.IMREAD_COLOR);
-        Mat corner_template = Imgcodecs.imread("src/main/resources/template.jpg");
-        Imgproc.resize(test_image, test_image, new Size(DEFAULT_WIDTH, DEFAULT_HEIGHT));
+        Mat corner_template = Imgcodecs.imread(dir + "/template.jpg");
+        Imgproc.resize(test_image,test_image,new Size(DEFAULT_WIDTH,DEFAULT_HEIGHT));
         ArrayList<Point> answer_coords = answer_coords(test_image, corner_template);
         answer_coords.sort((o1, o2) -> {
             if (o1.x < o2.x)
@@ -123,6 +124,7 @@ public class SheetReaderImplementation implements SheetReader {
                 else return 0;
             else return 0;
         });
+        HighGui.imshow("Display3", test_image);
 
         double column_width = (answer_coords.get(3).x - (answer_coords.get(0).x + corner_template.cols()));
         double column_height = (answer_coords.get(3).y - (answer_coords.get(0).y + corner_template.rows()));
