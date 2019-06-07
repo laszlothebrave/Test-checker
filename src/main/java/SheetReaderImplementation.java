@@ -38,7 +38,7 @@ public class SheetReaderImplementation implements SheetReader {
                 Rect char_roi = new Rect(new Point(j*(unit + char_offset),i*(unit+char_offset)),new Size(unit, unit));
                 Mat char_image = new Mat(code_image,char_roi);
                 int pixel_number = Core.countNonZero(char_image);
-                if(pixel_number >= unit*unit/5) colored[3*i+j] = true;
+                if(pixel_number >= unit*unit/6) colored[3*i+j] = true;
         }
 
         StringBuilder code = new StringBuilder();
@@ -124,7 +124,7 @@ public class SheetReaderImplementation implements SheetReader {
                 else return 0;
             else return 0;
         });
-        HighGui.imshow("Display3", test_image);
+        //HighGui.imshow("Display3", test_image);
 
         double column_width = (answer_coords.get(3).x - (answer_coords.get(0).x + corner_template.cols()));
         double column_height = (answer_coords.get(3).y - (answer_coords.get(0).y + corner_template.rows()));
