@@ -78,9 +78,12 @@ public class SheetReaderImplementation implements SheetReader {
 
     @Override
     public TestEvaluation readSheet(File file) {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        final String dir = System.getProperty("user.dir");
+        System.out.println("current dir = " + dir);
+        System.load(dir + "/opencv_java410.dll");
+        //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         Mat test_image = Imgcodecs.imread(file.getPath(), Imgcodecs.IMREAD_COLOR);
-        Mat corner_template = Imgcodecs.imread("src/main/resources/template.jpg");
+        Mat corner_template = Imgcodecs.imread(dir + "/template.jpg");
         Imgproc.resize(test_image,test_image,new Size(DEFAULT_WIDTH,DEFAULT_HEIGHT));
         ArrayList<Point> answer_coords = answer_coords(test_image, corner_template);
         answer_coords.sort((o1, o2) -> {

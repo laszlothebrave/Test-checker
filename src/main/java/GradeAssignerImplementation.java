@@ -56,7 +56,7 @@ public class GradeAssignerImplementation implements GradeAssigner{
             numberOfGoodAnswers+=goodForStudentAndGoodGlobal[0];
             globalGoodAnswers+=goodForStudentAndGoodGlobal[1];
         }
-        percentage=numberOfGoodAnswers/globalGoodAnswers*100;
+        percentage=numberOfGoodAnswers/(float)globalGoodAnswers*100;
 
         return percentage;
     }
