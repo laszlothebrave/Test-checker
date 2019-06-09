@@ -18,6 +18,8 @@ public class SheetReaderImplementation implements SheetReader {
     private final int DEFAULT_HEIGHT = 1123;
     private final int UNITS_IN_CODE = 4;
     private final int CODE_OFFSET_UNITS = 1;
+    private final int thresh = 135;
+
 
     private String get_student_code(Mat test_image, Rect answers_roi, double unit) {
         String alphabet = "ABCDEFGHI";
@@ -31,7 +33,7 @@ public class SheetReaderImplementation implements SheetReader {
         Mat code_image = new Mat(test_image,code_roi);
 
         Imgproc.cvtColor(code_image, code_image, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.threshold(code_image, code_image, 170, 255, Imgproc.THRESH_BINARY_INV);
+        Imgproc.threshold(code_image, code_image, thresh, 255, Imgproc.THRESH_BINARY_INV);
 
         for(int i = 0;i<3;i++)
             for(int j=0;j<3;j++){
@@ -51,7 +53,7 @@ public class SheetReaderImplementation implements SheetReader {
 
     private int get_answer(Mat row, double unit) {
         Imgproc.cvtColor(row,row,Imgproc.COLOR_BGR2GRAY);
-        Imgproc.threshold(row, row, 127, 255, Imgproc.THRESH_BINARY_INV);
+        Imgproc.threshold(row, row, thresh, 255, Imgproc.THRESH_BINARY_INV);
         int answer_index = 0;
         int max_pixel_number = 0;
         for (int i = 0; i < ANSWERS_NUMBER; i++) {

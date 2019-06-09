@@ -1,6 +1,7 @@
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ConsoleApp {
     static SheetReader sheetReader = new SheetReaderImplementation();
@@ -28,33 +29,30 @@ public class ConsoleApp {
                 "88Y8888' `8888P88    Y88888P d88P d88888P d8'     `88888P' `88888P' dP       dP   8888P Y8P  `88888P8 dP       `88888P' \n" +
                 "              .88                                                                                                       \n" +
                 "          d8888P                                                                                                        ");
+        System.out.println("\n\n\n");
         System.out.println("Umiesc plik o nazwie klucz_odpowiedzi.jpg w folderze klucz odpowiedzi i nacisnij enter");
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        promptEnterKey();
         try {
             createPaths(args);
         } catch (Exception e) {
-            System.out.println("Can't get access to files1");;
+            System.out.println("Nie mozna uzyskac dostepu do plikow");
+            return;
         }
+        System.out.println("Odczyt klucza odpowiedzi w trakcie");
         try {
             readCorrectAnswersSheet();
         } catch (CantReadCorrectAnswers e) {
-            e.printStackTrace();
+            System.out.println("Klucz odpowiedzi nie moze byc zdjeciem konia");
+            return;
         }
         System.out.println("Poprawnie odczytano klucz odpowiedzi");
         System.out.println("Umiesc pliki z arkuszami do oceny w formacie jpg w folderze arkusze_do_oceny i nacisnij enter");
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //promptEnterKey();
         try {
             readAtLeastOneStudentSheet();
         } catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Blad przy odczycie arkuszy");
+            return;
         }
         System.out.println("Odczytano co najmniej jeden arkusz");
         gradeAssigner.setAnswerKey(correctAnswers);
@@ -64,8 +62,13 @@ public class ConsoleApp {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Plik z wynikami znajduje się w folderze wyniki");
+        System.out.println("Plik z wynikami znajduje sie w folderze wyniki");
         System.out.println("Dziekujemy!");
+    }
+
+    public static void promptEnterKey(){
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     private static void createPaths(String[] args) {
@@ -80,9 +83,12 @@ public class ConsoleApp {
     }
 
     private static void readAtLeastOneStudentSheet(){
+        System.out.println("");
         for (File iter : testsPaths) {
+            System.out.print(". ");
             tests.add(sheetReader.readSheet(iter));
         }
+        System.out.println("");
     }
 
     private static void assignGrades () {
@@ -92,7 +98,7 @@ public class ConsoleApp {
     }
     private static void printResults() throws FileNotFoundException, UnsupportedEncodingException {
         String path=correctAnswersFile.getAbsolutePath();
-        PrintWriter writer = new PrintWriter("wyniki/the-file-name.txt", "UTF-8");
+        PrintWriter writer = new PrintWriter("wyniki/wyniki.txt", "UTF-8");
         writer.println("Results: ");
         for (GradeAndStudentCode iter : grades) {
             writer.println(iter.toString());
