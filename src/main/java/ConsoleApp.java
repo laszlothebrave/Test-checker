@@ -55,7 +55,7 @@ public class ConsoleApp {
             System.out.println("Blad przy odczycie arkuszy");
             return;
         }
-        System.out.println("Odczytano co najmniej jeden arkusz");
+        System.out.println("Poprawnie odczytano wszystkie arkusze");
         gradeAssigner.setAnswerKey(correctAnswers);
         assignGrades();
         try {
