@@ -41,13 +41,14 @@ public class ConsoleApp {
         System.out.println("Odczyt klucza odpowiedzi w trakcie");
         try {
             readCorrectAnswersSheet();
-        } catch (CantReadCorrectAnswers e) {
+        } catch (Exception e) {
             System.out.println("Klucz odpowiedzi nie moze byc zdjeciem konia");
+            System.out.println("Skopiuj klucz odpowiedzi z folderu arkusze_do_oceny");
             return;
         }
         System.out.println("Poprawnie odczytano klucz odpowiedzi");
         System.out.println("Umiesc pliki z arkuszami do oceny w formacie jpg w folderze arkusze_do_oceny i nacisnij enter");
-        //promptEnterKey();
+        promptEnterKey();
         try {
             readAtLeastOneStudentSheet();
         } catch (Exception e){
