@@ -31,7 +31,7 @@ public class SheetReaderImplementation implements SheetReader {
         Mat code_image = new Mat(test_image,code_roi);
 
         Imgproc.cvtColor(code_image, code_image, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.threshold(code_image, code_image, 200, 255, Imgproc.THRESH_BINARY_INV);
+        Imgproc.threshold(code_image, code_image, 170, 255, Imgproc.THRESH_BINARY_INV);
 
         for(int i = 0;i<3;i++)
             for(int j=0;j<3;j++){
@@ -108,7 +108,6 @@ public class SheetReaderImplementation implements SheetReader {
     @Override
     public TestEvaluation readSheet(File file) {
         final String dir = System.getProperty("user.dir");
-        System.out.println("current dir = " + dir);
         System.load(dir + "/opencv_java410.dll");
         //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         Mat test_image = Imgcodecs.imread(file.getPath(), Imgcodecs.IMREAD_COLOR);
