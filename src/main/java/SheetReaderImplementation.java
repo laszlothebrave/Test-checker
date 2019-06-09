@@ -100,7 +100,7 @@ public class SheetReaderImplementation implements SheetReader {
             Mat match_result = new Mat();
             Imgproc.warpAffine(corner_template, corner_template, rotation, size);
             Imgproc.matchTemplate(test_image, corner_template, match_result, match_method);
-            Core.MinMaxLocResult mmr = Core.minMaxLoc(match_result);
+             Core.MinMaxLocResult mmr = Core.minMaxLoc(match_result);
             coords.add(mmr.maxLoc);
         }
         return coords;
