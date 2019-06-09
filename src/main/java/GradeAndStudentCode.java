@@ -14,22 +14,22 @@ public class GradeAndStudentCode {
         codeAndGrade.append(" dear Student your grade is: ");
         switch(grade){
             case A:
-                codeAndGrade.append("A (5)");
+                codeAndGrade.append("5 bardzo dobre");
                 break;
             case B:
-                codeAndGrade.append("B (4.5)");
+                codeAndGrade.append("4.5 dobre+");
                 break;
             case C:
-                codeAndGrade.append("C (4)");
+                codeAndGrade.append("4 dobre");
                 break;
             case D:
-                codeAndGrade.append("D (3.5)");
+                codeAndGrade.append("3.5 dostateczny+");
                 break;
             case E:
-                codeAndGrade.append("E (3)");
+                codeAndGrade.append("3 dostateczny");
                 break;
             case F:
-                codeAndGrade.append("F (2)");
+                codeAndGrade.append("2 nie dostateczny");
                 break;
 
         }
